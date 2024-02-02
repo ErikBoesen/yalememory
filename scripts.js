@@ -108,7 +108,7 @@ function initMap() {
 
     console.log('Running Papa query...');
     // TODO: Do this asynchronously
-    const papa = await fetchPapaData(yearDocuments.get(year).sheetID);
+    //const papa = await fetchPapaData(yearDocuments.get(year).sheetID);
 }
 
 function fetchPapaData(sheetID) {

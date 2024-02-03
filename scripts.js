@@ -3,6 +3,96 @@ var mapElement = document.getElementById('map');
 var popupOpen = false;
 const sheetID = '2PACX-1vTr-LZbaPvZsAPGtDZgpy8114aJmzIrLdb2i2DLnZMK1DrVNbiP7SL9j1jESAm4AFpErxegxC0imtNH';
 
+const C_DARK = '#222222',
+      C_NORMAL = '#333333',
+      C_LIGHT = '#444444',
+      C_EXTRALIGHT = '#666666',
+      C_ACCENT = '#63aaff',
+      C_WHITE = '#f9f9f9';
+const mapStyles = [
+    {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{
+            color: C_DARK
+        }]
+    },
+    {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [{
+            color: C_LIGHT
+        }]
+    },
+    {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+            {
+                color: C_LIGHT
+            },
+            {
+                lightness: -37
+            }
+        ]
+    },
+    {
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [{
+            color: C_EXTRALIGHT
+        }]
+    },
+    {
+        elementType: 'labels.text.stroke',
+        stylers: [
+            {
+                visibility: 'on'
+            },
+            {
+                color: C_EXTRALIGHT
+            },
+            {
+                weight: 2
+            },
+            {
+                gamma: 0.84
+            }
+        ]
+    },
+    {
+        elementType: 'labels.text.fill',
+        stylers: [{
+            color: C_WHITE
+        }]
+    },
+    {
+        featureType: 'administrative',
+        elementType: 'geometry',
+        stylers: [
+            {
+                weight: 0.6
+            },
+            {
+                color: C_ACCENT
+            }
+        ]
+    },
+    {
+        elementType: 'labels.icon',
+        stylers: [{
+            visibility: 'off'
+        }]
+    },
+    {
+        featureType: 'poi.park',
+        elementType: 'geometry',
+        stylers: [{
+            color: C_NORMAL
+        }]
+    }
+];
+
 
 // Called by Maps API upon loading.
 function initMap() {
@@ -10,10 +100,10 @@ function initMap() {
 
     map = new google.maps.Map(mapElement, { // Define Map Settings
         center: {
-            lat: 35,
-            lng: -98
+            lat: 41.3163,
+            lng: -72.9228
         },
-        zoom: 4,
+        zoom: 15,
         disableDefaultUI: true,
         zoomControl: true,
         mapTypeControl: false,
@@ -21,89 +111,7 @@ function initMap() {
         rotateControl: false,
         fullscreenControl: true,
         backgroundColor: '#333333',
-        styles: [
-            {
-                featureType: 'water',
-                elementType: 'geometry',
-                stylers: [{
-                    color: '#222222'
-                }]
-            },
-            {
-                featureType: 'landscape',
-                elementType: 'geometry',
-                stylers: [{
-                    color: '#444444'
-                }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry',
-                stylers: [
-                    {
-                        color: '#444444'
-                    },
-                    {
-                        lightness: -37
-                    }
-                ]
-            },
-            {
-                featureType: 'poi',
-                elementType: 'geometry',
-                stylers: [{
-                    color: '#666666'
-                }]
-            },
-            {
-                elementType: 'labels.text.stroke',
-                stylers: [
-                    {
-                        visibility: 'on'
-                    },
-                    {
-                        color: '#666666'
-                    },
-                    {
-                        weight: 2
-                    },
-                    {
-                        gamma: 0.84
-                    }
-                ]
-            },
-            {
-                elementType: 'labels.text.fill',
-                stylers: [{
-                    color: '#ffffff'
-                }]
-            },
-            {
-                featureType: 'administrative',
-                elementType: 'geometry',
-                stylers: [
-                    {
-                        weight: 0.6
-                    },
-                    {
-                        color: '#d12727'
-                    }
-                ]
-            },
-            {
-                elementType: 'labels.icon',
-                stylers: [{
-                    visibility: 'off'
-                }]
-            },
-            {
-                featureType: 'poi.park',
-                elementType: 'geometry',
-                stylers: [{
-                    color: '#333333'
-                }]
-            }
-        ]
+        styles: mapStyles,
     });
 
     console.log('Running Papa query...');
@@ -121,7 +129,7 @@ function fetchPapaData() {
             error: reject,
             // "complete:" is the callback when the parser finishes, and spits out its finished data (the data is stored in the 'papa' variable)
             complete: function({ data }, _) {
-                console.log(papa.data);
+                console.log(data);
                 /*
                 for (name in memories) {
                     //console.log('Creating marker for ' + name + ' with ' + institutions[name].students.length + ' student(s).');

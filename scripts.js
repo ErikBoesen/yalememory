@@ -1,7 +1,7 @@
 var map, popup, Popup;
 var mapElement = document.getElementById('map');
 var popupOpen = false;
-const sheetID = '12mP-KTGfJ_kc67ZpnN0VwAFBVozCpfs07vfhsU64leI';
+const sheetID = '2PACX-1vTr-LZbaPvZsAPGtDZgpy8114aJmzIrLdb2i2DLnZMK1DrVNbiP7SL9j1jESAm4AFpErxegxC0imtNH';
 
 
 // Called by Maps API upon loading.
@@ -107,49 +107,23 @@ function initMap() {
     });
 
     console.log('Running Papa query...');
-    // TODO: Do this asynchronously
-    //const papa = await fetchPapaData(yearDocuments.get(year).sheetID);
+    fetchPapaData()
+        .then(displayMap);
 }
 
-function fetchPapaData(sheetID) {
+function fetchPapaData() {
     var fetchFunction = function fetchData(resolve, reject) {
-        Papa.parse(`https://docs.google.com/spreadsheets/d/e/${sheetID}&single=true&output=csv`, {
+        Papa.parse(`https://docs.google.com/spreadsheets/d/e/${sheetID}/pub?output=csv`, {
             header: true,
             download: true,
             delimiter: ',',
             dynamicTyping: true,
             error: reject,
             // "complete:" is the callback when the parser finishes, and spits out its finished data (the data is stored in the 'papa' variable)
-            complete: function(papa, _) {
-                var institutions = {};
-                var coordinates = {};
-                // Turn 2D list into easily-subscriptable object
-                for (institution of tabletop.sheets('coordinates').toArray()) {
-                    coordinates[institution[0]] = {
-                        lat: parseFloat(institution[1]),
-                        lng: parseFloat(institution[2]),
-                    };
-                }
-                // TODO: Stop getting sheet data in array
-                for (student of tabletop.sheets('raw').toArray()) {
-                    if (!institutions[student[2]]) { // If the institution isn't already in the list
-                        institutions[student[2].trim()] = {
-                            name: student[2].trim(),
-                            students: [],
-                            position: coordinates[student[2].trim()],
-                        }
-                    }
-                    institutions[student[2].trim()].students.push({
-                        name: student[3].trim() + ' ' + student[4].trim(),
-                        major: student[5].trim(),
-                    });
-                }
-                for (institution of tabletop.sheets('logos').all()) {
-                    if (institutions[institution.name])
-                        institutions[institution.name].logo = institution.logo;
-                }
-                console.log(institutions);
-                for (name in institutions) {
+            complete: function({ data }, _) {
+                console.log(papa.data);
+                /*
+                for (name in memories) {
                     //console.log('Creating marker for ' + name + ' with ' + institutions[name].students.length + ' student(s).');
                     var marker = new google.maps.Marker(institutions[name]);
                     google.maps.event.addListener(marker, 'click', function() {
@@ -157,11 +131,16 @@ function fetchPapaData(sheetID) {
                     });
                     marker.setMap(map);
                 }
+                */
             }
         });
     }
 
     return new Promise(fetchFunction);
+}
+
+function displayMap() {
+    // TODO
 }
 
 function clearPopups() {

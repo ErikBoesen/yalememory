@@ -5,8 +5,8 @@ let popupOpen = false;
 const sheetID = '2PACX-1vTr-LZbaPvZsAPGtDZgpy8114aJmzIrLdb2i2DLnZMK1DrVNbiP7SL9j1jESAm4AFpErxegxC0imtNH';
 const formID = '1FAIpQLSeReJCEVjobeGBiXIlwyMtDqmA8kb2V_DCeM0F1k3C51tyTwQ';
 const CENTER = {
-    lat: 41.3163,
-    lng: -72.9228
+    lat: 41.3150,
+    lng: -72.9272,
 };
 const PAN_DISTANCE = 0.1;
 const C_DARK = '#001f40',

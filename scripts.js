@@ -2,6 +2,11 @@ var map, popup, Popup;
 var mapElement = document.getElementById('map');
 var popupOpen = false;
 const sheetID = '2PACX-1vTr-LZbaPvZsAPGtDZgpy8114aJmzIrLdb2i2DLnZMK1DrVNbiP7SL9j1jESAm4AFpErxegxC0imtNH';
+const CENTER = {
+    lat: 41.3163,
+    lng: -72.9228
+};
+const PAN_DISTANCE = 0.1;
 
 const C_DARK = '#001f40',
       C_NORMAL = '#002a55',
@@ -99,11 +104,19 @@ function initMap() {
     definePopupClass();
 
     map = new google.maps.Map(mapElement, { // Define Map Settings
-        center: {
-            lat: 41.3163,
-            lng: -72.9228
+        center: CENTER,
+        restriction: {
+            latLngBounds: {
+                north: CENTER.lat + PAN_DISTANCE,
+                south: CENTER.lat - PAN_DISTANCE,
+                west: CENTER.lng - PAN_DISTANCE,
+                east: CENTER.lng + PAN_DISTANCE,
+            },
+            strictBounds: false,
         },
+
         zoom: 15,
+        minZoom: 14,
         disableDefaultUI: true,
         zoomControl: true,
         mapTypeControl: false,

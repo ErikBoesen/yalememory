@@ -22,17 +22,38 @@ body.placing, body.placing * {
 div a[rel="noopener"] img {
     display: none !important;
 }
+#splash {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 52, 107, 0.4);
+    z-index: 100;
+}
+#splashContent {
+    background: #00356b;
+    max-width: 4in;
+    padding: 30px 40px;
+}
+#splashContent h2 {
+    font-size: 50px;
+}
+#splashContent p {
+    margin: 10px 0;
+}
 #branding {
     position: absolute;
     top: 0;
     left: 0;
     padding: 10px;
-    width: 250px;
+    width: 100px;
     background: #00356b;
 }
 #branding h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 20px;
 }
 #branding a {
     color: inherit;

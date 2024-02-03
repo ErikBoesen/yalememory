@@ -191,6 +191,9 @@ function details(memory) {
     let title = document.createElement('h3');
     title.textContent = memory.title;
     info.appendChild(title);
+    let bodyHeader = document.createElement('em');
+    bodyHeader.textContent = 'What\'s the fondest memory you have at this location?';
+    info.appendChild(bodyHeader);
     let body = document.createElement('p');
     body.textContent = memory.body;
     info.appendChild(body);
@@ -243,3 +246,12 @@ placeButton.onclick = function() {
         startPlacing();
     }
 }
+
+const splash = document.getElementById('splash');
+if (!localStorage.splashShown) {
+    splash.style.display = 'flex';
+}
+splash.onclick = function() {
+    localStorage.splashShown = true;
+    splash.style.display = 'none';
+};

@@ -3,10 +3,10 @@ var mapElement = document.getElementById('map');
 var popupOpen = false;
 const sheetID = '2PACX-1vTr-LZbaPvZsAPGtDZgpy8114aJmzIrLdb2i2DLnZMK1DrVNbiP7SL9j1jESAm4AFpErxegxC0imtNH';
 
-const C_DARK = '#222222',
-      C_NORMAL = '#333333',
-      C_LIGHT = '#444444',
-      C_EXTRALIGHT = '#666666',
+const C_DARK = '#001f40',
+      C_NORMAL = '#002a55',
+      C_LIGHT = '#00356b',
+      C_EXTRALIGHT = '#286dc0',
       C_ACCENT = '#63aaff',
       C_WHITE = '#f9f9f9';
 const mapStyles = [
@@ -110,7 +110,7 @@ function initMap() {
         streetViewControl: false,
         rotateControl: false,
         fullscreenControl: true,
-        backgroundColor: '#333333',
+        backgroundColor: C_NORMAL,
         styles: mapStyles,
     });
 

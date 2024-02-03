@@ -5,8 +5,8 @@
 }
 html, body, #map { height: 100%; }
 body {
-    background-color: #333;
-    color: #333;
+    background-color: #00356b;
+    color: white;
     font-size: 16px;
     font-family: 'Lato', sans-serif;
 }
@@ -25,8 +25,8 @@ div a[rel="noopener"] img {
     left: 0;
     padding: 10px;
     color: white;
-    width: 140px;
-    background: #222;
+    width: 150px;
+    background: #00356b;
 }
 #branding a {
     color: inherit;

@@ -1,13 +1,14 @@
-var map, popup, Popup;
-var mapElement = document.getElementById('map');
-var popupOpen = false;
+const mapElement = document.getElementById('map');
+const placeButton = document.getElementById('placeButton');
+let map, popup, Popup;
+let popupOpen = false;
 const sheetID = '2PACX-1vTr-LZbaPvZsAPGtDZgpy8114aJmzIrLdb2i2DLnZMK1DrVNbiP7SL9j1jESAm4AFpErxegxC0imtNH';
+const formID = '1FAIpQLSeReJCEVjobeGBiXIlwyMtDqmA8kb2V_DCeM0F1k3C51tyTwQ';
 const CENTER = {
     lat: 41.3163,
     lng: -72.9228
 };
 const PAN_DISTANCE = 0.1;
-
 const C_DARK = '#001f40',
       C_NORMAL = '#002a55',
       C_LIGHT = '#00356b',
@@ -130,6 +131,17 @@ function initMap() {
     console.log('Running Papa query...');
     fetchPapaData()
         .then(displayMap);
+
+    map.addListener('click', (mapsMouseEvent) => {
+        if (placing) {
+            let coordinates = mapsMouseEvent.latLng;
+            let lat = coordinates.lat();
+            let lng = coordinates.lng();
+            window.open(`https://docs.google.com/forms/d/e/${formID}/viewform?usp=pp_url&entry.732376344=${lat}&entry.1233983317=${lng}`, '_blank');
+            //&entry.1896936497=titlehere&entry.1231121394=bodyhere
+            stopPlacing();
+        }
+    });
 }
 
 function fetchPapaData() {
@@ -208,3 +220,22 @@ onkeydown = function(e) {
     }
 }
 
+let placing = false;
+function startPlacing() {
+    placing = true;
+    document.body.classList.add('placing');
+}
+
+function stopPlacing() {
+    placing = false;
+    document.body.classList.remove('placing');
+}
+
+placeButton.onclick = function() {
+    console.log('hi' + placing);
+    if (placing) {
+        stopPlacing();
+    } else {
+        startPlacing();
+    }
+}

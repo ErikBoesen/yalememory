@@ -32,6 +32,7 @@ div a[rel="noopener"] img {
 }
 #branding h1 {
     font-size: 40px;
+    margin-bottom: 10px;
 }
 #branding a {
     color: inherit;
@@ -43,9 +44,11 @@ div a[rel="noopener"] img {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 10px;
-    width: 150px;
+    padding: 10px 15px;
     background: #00356b;
+    font-weight: bold;
+    cursor: pointer;
+    animation: 5s pulse infinite;
 }
 body #placingText {
     display: none;
@@ -55,4 +58,19 @@ body.placing #placingText {
 }
 body.placing #placeText {
     display: none;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    90% {
+        transform: scale(1);
+    }
+    95% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+
 }

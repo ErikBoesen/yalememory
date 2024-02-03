@@ -161,7 +161,7 @@ function fetchPapaData() {
                             lng: rawMemory['Longitude'],
                         },
                         title: rawMemory['Title of your memory'],
-                        body: rawMemory['Tell us your memory'],
+                        body: rawMemory['What\'s your fondest memory at this location?'],
                     };
                     //console.log('Creating marker for ' + name + ' with ' + institutions[name].students.length + ' student(s).');
                     var marker = new google.maps.Marker(memory);
@@ -185,13 +185,17 @@ function clearPopups() {
     if (popup) popup.setMap(null);
 }
 
-function details(institution) {
+function details(memory) {
     clearPopups();
-    var info = document.createElement('div');
-    var title = document.createElement('h3');
-    title.textContent = institution.name;
+    let info = document.createElement('div');
+    let title = document.createElement('h3');
+    title.textContent = memory.title;
     info.appendChild(title);
-    popup = new Popup(new google.maps.LatLng(institution.position.lat(), institution.position.lng()), info);
+    let body = document.createElement('p');
+    body.textContent = memory.body;
+    info.appendChild(body);
+
+    popup = new Popup(new google.maps.LatLng(memory.position.lat(), memory.position.lng()), info);
     popup.setMap(map);
     console.log('Adding popup');
     popupOpen = true;

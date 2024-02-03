@@ -8,7 +8,7 @@
 /* The bubble is anchored above the tip. */
 .popup {
     position: absolute;
-    width: 100%;
+    width: 200px;
     bottom: /* TIP_HEIGHT= */ 20px;
     left: 0;
     pointer-events: none;

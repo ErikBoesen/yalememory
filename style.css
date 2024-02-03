@@ -27,8 +27,11 @@ div a[rel="noopener"] img {
     top: 0;
     left: 0;
     padding: 10px;
-    width: 150px;
+    width: 250px;
     background: #00356b;
+}
+#branding h1 {
+    font-size: 40px;
 }
 #branding a {
     color: inherit;

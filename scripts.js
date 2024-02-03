@@ -129,17 +129,22 @@ function fetchPapaData() {
             error: reject,
             // "complete:" is the callback when the parser finishes, and spits out its finished data (the data is stored in the 'papa' variable)
             complete: function({ data }, _) {
-                console.log(data);
-                /*
-                for (name in memories) {
+                for (let rawMemory of data) {
+                    let memory = {
+                        position: {
+                            lat: rawMemory['Latitude'],
+                            lng: rawMemory['Longitude'],
+                        },
+                        title: rawMemory['Title of your memory'],
+                        body: rawMemory['Tell us your memory'],
+                    };
                     //console.log('Creating marker for ' + name + ' with ' + institutions[name].students.length + ' student(s).');
-                    var marker = new google.maps.Marker(institutions[name]);
+                    var marker = new google.maps.Marker(memory);
                     google.maps.event.addListener(marker, 'click', function() {
                         details(this);
                     });
                     marker.setMap(map);
                 }
-                */
             }
         });
     }
